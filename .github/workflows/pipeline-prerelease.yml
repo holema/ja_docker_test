@@ -69,5 +69,9 @@ jobs:
 
   upload_dockerhub:
     uses: holema/ja_docker_test/.github/workflows/task-upload-docker-hub.yml@devops
+    with:
+      reponame: 'h2invent/jitsi-admin-main'
+      dockerfile_path: './Dockerfile'
+      directory: '.'
     needs:
       - create_release
