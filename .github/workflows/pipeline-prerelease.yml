@@ -10,16 +10,17 @@ on:
 
 jobs:
   artifact:
-    uses: h2-invent/jitsi-admin/.github/workflows/task-artifact.yml@devops
+    uses: holema/ja_docker_test/.github/workflows/task-artifact.yml@devops
 
   test:
-    uses: h2-invent/jitsi-admin/.github/workflows/task-test.yml@devops
+    uses: holema/ja_docker_test/.github/workflows/task-test.yml@devops
     needs:
       - artifact
 
   create_release:
     needs:
-      - test
+       - test
+       - artifact
     runs-on: ubuntu-latest
     steps:
       - name: Get current date
@@ -66,3 +67,28 @@ jobs:
           artifacts: artifact/application.zip,artifact/nodejs/websocket.zip
           artifactContentType: application/zip
 
+  upload_dockerhub_main:
+    needs:
+      - test
+    uses: holema/ja_docker_test/.github/workflows/task-upload-docker-hub.yml@devops
+    with:
+      reponame: 'h2invent/jitsi-admin-main'
+      dockerfile_path: './Dockerfile'
+      directory: '.'
+      version: "h2invent/jitsi-admin-main:dev-ci-unstable-${{github.run_number}}"
+    secrets:
+      dockerhub_password: ${{ secrets.DOCKERHUB_TOKEN }}
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+
+  upload_dockerhub_websocket:
+    uses: holema/ja_docker_test/.github/workflows/task-upload-docker-hub.yml@devops
+    with:
+      reponame: 'h2invent/jitsi-admin-websocket'
+      dockerfile_path: './nodejs/Dockerfile'
+      directory: './nodejs'
+      version: "h2invent/jitsi-admin-websocket:dev-ci-unstable-${{github.run_number}}"
+    secrets:
+      dockerhub_password: ${{ secrets.DOCKERHUB_TOKEN }}
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+    needs:
+      - test
