@@ -10,10 +10,10 @@ on:
 
 jobs:
   artifact:
-    uses: {{ $TASK_DIR }}/.github/workflows/task-artifact.yml@devops
+    uses: ${{ vars.TASK_DIR }}/.github/workflows/task-artifact.yml@devops
 
   #test:
-  #  uses: {{$TASK_DIR}}/.github/workflows/task-test.yml@devops
+  #  uses: ${{ vars.TASK_DIR }}/.github/workflows/task-test.yml@devops
    # needs:
    #   - artifact
 
@@ -68,6 +68,6 @@ jobs:
           artifactContentType: application/zip
 
   upload_dockerhub:
-    uses: {{$TASK_DIR}}/.github/workflows/task-upload-docker-hub.yml@devops
+    uses: ${{ vars.TASK_DIR }}/.github/workflows/task-upload-docker-hub.yml@devops
     needs:
       - create_release
