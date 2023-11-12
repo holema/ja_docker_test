@@ -12,14 +12,14 @@ jobs:
   artifact:
     uses: holema/ja_docker_test/.github/workflows/task-artifact.yml@devops
 
-  #test:
-  #  uses: holema/ja_docker_test/.github/workflows/task-test.yml@devops
-   # needs:
-   #   - artifact
+  test:
+    uses: holema/ja_docker_test/.github/workflows/task-test.yml@devops
+    needs:
+      - artifact
 
   create_release:
     needs:
-       #- test
+       - test
        - artifact
     runs-on: ubuntu-latest
     steps:
