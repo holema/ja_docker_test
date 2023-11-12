@@ -77,5 +77,16 @@ jobs:
     secrets:
       dockerhub_password: ${{ secrets.DOCKERHUB_TOKEN }}
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
-    #needs:
-     # - create_release
+
+  upload_dockerhub_websocket:
+    uses: holema/ja_docker_test/.github/workflows/task-upload-docker-hub.yml@devops
+    with:
+      reponame: 'h2invent/jitsi-admin-websocket'
+      dockerfile_path: './nodejs/Dockerfile'
+      directory: './nodejs'
+      version: "dev-ci-unstable-${{github.run_number}}"
+    secrets:
+      dockerhub_password: ${{ secrets.DOCKERHUB_TOKEN }}
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+    needs:
+      - upload_dockerhub_main
