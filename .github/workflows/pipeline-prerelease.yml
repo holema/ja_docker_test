@@ -68,12 +68,14 @@ jobs:
           artifactContentType: application/zip
 
   upload_dockerhub_main:
+    needs:
+      - test
     uses: holema/ja_docker_test/.github/workflows/task-upload-docker-hub.yml@devops
     with:
       reponame: 'h2invent/jitsi-admin-main'
       dockerfile_path: './Dockerfile'
       directory: '.'
-      version: "dev-ci-unstable-${{github.run_number}}"
+      version: "h2invent/jitsi-admin-main:dev-ci-unstable-${{github.run_number}}"
     secrets:
       dockerhub_password: ${{ secrets.DOCKERHUB_TOKEN }}
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -84,9 +86,9 @@ jobs:
       reponame: 'h2invent/jitsi-admin-websocket'
       dockerfile_path: './nodejs/Dockerfile'
       directory: './nodejs'
-      version: "dev-ci-unstable-${{github.run_number}}"
+      version: "h2invent/jitsi-admin-websocket:dev-ci-unstable-${{github.run_number}}"
     secrets:
       dockerhub_password: ${{ secrets.DOCKERHUB_TOKEN }}
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
     needs:
-      - upload_dockerhub_main
+      - test
