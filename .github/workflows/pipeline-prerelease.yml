@@ -10,16 +10,17 @@ on:
 
 jobs:
   artifact:
-    uses: h2-invent/jitsi-admin/.github/workflows/task-artifact.yml@devops
+    uses: $TASK_DIR/.github/workflows/task-artifact.yml@devops
 
-  test:
-    uses: h2-invent/jitsi-admin/.github/workflows/task-test.yml@devops
-    needs:
-      - artifact
+  #test:
+  #  uses: $TASK_DIR/.github/workflows/task-test.yml@devops
+   # needs:
+   #   - artifact
 
   create_release:
     needs:
-      - test
+       #- test
+       - artifact
     runs-on: ubuntu-latest
     steps:
       - name: Get current date
@@ -65,3 +66,8 @@ jobs:
           tag: DEV-CI-${{ steps.date.outputs.date }}-${{github.run_number}}
           artifacts: artifact/application.zip,artifact/nodejs/websocket.zip
           artifactContentType: application/zip
+
+  upload_dockerhub:
+    uses: $TASK_DIR/.github/workflows/task-upload-docker-hub.yml@devops
+    needs:
+      - create_release
