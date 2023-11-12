@@ -73,7 +73,7 @@ jobs:
       reponame: 'h2invent/jitsi-admin-main'
       dockerfile_path: './Dockerfile'
       directory: '.'
-      version: DEV-CI-${{ steps.date.outputs.date }}-${{github.run_number}}
+      version: "DEV-CI-${{ github.event.repository.updated_at}}-${{github.run_number}}"
     secrets:
       dockerhub_password: ${{ secrets.DOCKERHUB_TOKEN }}
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
