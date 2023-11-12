@@ -73,7 +73,7 @@ jobs:
       reponame: 'h2invent/jitsi-admin-main'
       dockerfile_path: './Dockerfile'
       directory: '.'
-      dockerhub_password: ${{secrets.DOCKERHUB_PASSWORD}}
-      dockerhub_username: ${{secrets.DOCKERHUB_USERNAME}}
+      dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
     needs:
       - create_release
