@@ -27,6 +27,10 @@ on:
         default: './Dockerfile'
         required: true
         type: string
+      version:
+        description: 'the version/tag of the Dockerfile image'
+        required: true
+        type: string
     secrets:
       dockerhub_username:
         required: true
@@ -63,5 +67,5 @@ jobs:
           context: ${{ inputs.directory }}
           file: ${{ inputs.dockerfile_path }}
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ inputs.version }}
+          labels: ${{ inputs.version }}
