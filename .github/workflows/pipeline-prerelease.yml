@@ -10,10 +10,10 @@ on:
 
 jobs:
   artifact:
-    uses: ${{ vars.TASK_DIR }}/.github/workflows/task-artifact.yml@devops
+    uses: holema/ja_docker_test/.github/workflows/task-artifact.yml@devops
 
   #test:
-  #  uses: ${{ vars.TASK_DIR }}/.github/workflows/task-test.yml@devops
+  #  uses: holema/ja_docker_test/.github/workflows/task-test.yml@devops
    # needs:
    #   - artifact
 
@@ -68,6 +68,6 @@ jobs:
           artifactContentType: application/zip
 
   upload_dockerhub:
-    uses: ${{ vars.TASK_DIR }}/.github/workflows/task-upload-docker-hub.yml@devops
+    uses: holema/ja_docker_test/.github/workflows/task-upload-docker-hub.yml@devops
     needs:
       - create_release
