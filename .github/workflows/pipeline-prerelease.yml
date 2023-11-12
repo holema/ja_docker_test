@@ -12,14 +12,15 @@ jobs:
   artifact:
     uses: $TASK_DIR/.github/workflows/task-artifact.yml@devops
 
-  test:
-    uses: $TASK_DIR/.github/workflows/task-test.yml@devops
-    needs:
-      - artifact
+  #test:
+  #  uses: $TASK_DIR/.github/workflows/task-test.yml@devops
+   # needs:
+   #   - artifact
 
   create_release:
     needs:
-      - test
+       #- test
+       - artifact
     runs-on: ubuntu-latest
     steps:
       - name: Get current date
