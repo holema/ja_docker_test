@@ -86,7 +86,7 @@ jobs:
       reponame: 'h2invent/jitsi-admin-main'
       dockerfile_path: './Dockerfile'
       directory: '.'
-      version: "h2invent/jitsi-admin-main:latest,h2invent/jitsi-admin-main:${{ needs.create_release.outputs.create_release_output }}"
+      version: h2invent/jitsi-admin-main:latest,h2invent/jitsi-admin-main:${{ needs.create_release.outputs.create_release_output }}
     secrets:
       dockerhub_password: ${{ secrets.DOCKERHUB_TOKEN }}
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -99,7 +99,7 @@ jobs:
       reponame: 'h2invent/jitsi-admin-websocket'
       dockerfile_path: './nodejs/Dockerfile'
       directory: './nodejs'
-      version: "h2invent/jitsi-admin-websocket:latest,h2invent/jitsi-admin-websocket:${{ needs.create_release.outputs.create_release_output }}"
+      version: h2invent/jitsi-admin-websocket:latest,h2invent/jitsi-admin-websocket:${{ needs.create_release.outputs.create_release_output }}
     secrets:
       dockerhub_password: ${{ secrets.DOCKERHUB_TOKEN }}
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
