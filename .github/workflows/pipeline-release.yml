@@ -17,8 +17,7 @@ jobs:
       - artifact
     runs-on: ubuntu-latest
     outputs:
-      id: create_release_output
-      set: ${{ steps.version.outputs.version }}
+      create_release_output: ${{ steps.version.outputs.version }}
     steps:
     
       - name: Checkout
