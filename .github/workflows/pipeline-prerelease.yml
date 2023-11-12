@@ -65,4 +65,3 @@ jobs:
           tag: DEV-CI-${{ steps.date.outputs.date }}-${{github.run_number}}
           artifacts: artifact/application.zip,artifact/nodejs/websocket.zip
           artifactContentType: application/zip
-
