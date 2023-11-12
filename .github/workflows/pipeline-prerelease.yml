@@ -67,11 +67,13 @@ jobs:
           artifacts: artifact/application.zip,artifact/nodejs/websocket.zip
           artifactContentType: application/zip
 
-  upload_dockerhub:
+  upload_dockerhub_main:
     uses: holema/ja_docker_test/.github/workflows/task-upload-docker-hub.yml@devops
     with:
       reponame: 'h2invent/jitsi-admin-main'
       dockerfile_path: './Dockerfile'
       directory: '.'
+      dockerhub_password: ${{secrets.DOCKERHUB_PASSWORD}}
+      dockerhub_username: ${{secrets.DOCKERHUB_USERNAME}}
     needs:
       - create_release
